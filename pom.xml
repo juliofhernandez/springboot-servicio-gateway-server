@@ -23,12 +23,17 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
+			<exclusions>
+	            <exclusion>
+	                <groupId>org.springframework.cloud.netflix.eureka</groupId>
+	                <artifactId>spring-cloud-netflix-eureka-client</artifactId>
+	            </exclusion>
+        	</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>

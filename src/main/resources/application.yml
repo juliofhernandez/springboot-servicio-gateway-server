@@ -19,3 +19,8 @@ spring:
           - Path=/api/item/**
         filters:
           - StripPrefix=2
+          - AddRequestHeader=token-request,123123
+          - AddResponseHeader=token-response,456456
+          - SetResponseHeader=Content-Type,text/plain
+          - AddRequestParameter=nombre,julio
+          
