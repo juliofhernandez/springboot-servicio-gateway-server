@@ -1,4 +1,4 @@
-com/microservices/springboot/app/gateway/filters/factory/EjemploGatewayFilterFactory$Configuracion.class
+com/microservices/springboot/app/gateway/filters/factory/EjemploGatewayFilterFactory$ConfigurationCookie.class
 com/microservices/springboot/app/gateway/SpringbootServicioGatewayServerApplication.class
 com/microservices/springboot/app/gateway/filters/EjemploGlobalFilter.class
 com/microservices/springboot/app/gateway/filters/factory/EjemploGatewayFilterFactory.class

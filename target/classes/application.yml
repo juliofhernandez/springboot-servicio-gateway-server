@@ -1,3 +1,24 @@
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        sliding-window-size: 6
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
+        slow-call-rate-threshold: 50
+        slow-call-duration-threshold: 1s
+    instances:
+      productsCircuitBreaker:
+        base-config: default
+  timelimiter:
+    configs:
+      default:
+        timeout-duration: 2s
+    instances:
+      productsCircuitBreaker:
+        base-config: default
+
 spring:
   cloud:
     gateway:
@@ -6,16 +27,22 @@ spring:
         uri: lb://service-products
         predicates:
           - Path=/api/product/**
-          - Header=token,\d+
-          - Method=GET,POST
-          - Query=color,verde
-          - Cookie=color,azul
+#          - Header=X-Header-Predicate,\d+
+#          - Method=GET,POST
+#          - Query=paramQueryColor,blue
+#          - Cookie=cookie_predicate_country,IT
         filters:
           - StripPrefix=2
+          - name: CircuitBreaker
+            args:
+              name: productsCircuitBreaker
+              statusCodes: 500,404
+              fallbackUri: forward:/api/item/items/1
           - name: Ejemplo
             args:
-              mensaje: "Hola, Mensaje personalizado"
-              cookieNombre: usuario
+              mensajePRE: "Hola, Mensaje personalizado PRE"
+              mensajePOST: "Hola, Mensaje personalizado POST"
+              cookieNombre: cookie_name
               cookieValor:  juliofhernandez
       - id: service-items
         uri: lb://service-items
@@ -23,8 +50,6 @@ spring:
           - Path=/api/item/**
         filters:
           - StripPrefix=2
-          - AddRequestHeader=token-request,123123
-          - AddResponseHeader=token-response,456456
-          - SetResponseHeader=Content-Type,text/plain
-          - AddRequestParameter=nombre,julio
-          
+          - AddRequestParameter=paramRequestItems,julio
+          - AddRequestHeader=X-Header-Request-Items,123123
+          - AddResponseHeader=X-Header-Response-Items,456456
