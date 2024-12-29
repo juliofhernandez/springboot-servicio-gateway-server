@@ -36,7 +36,7 @@ spring:
           - name: CircuitBreaker
             args:
               name: productsCircuitBreaker
-              statusCodes: 500,404
+              statusCodes: 500
               fallbackUri: forward:/api/item/items/1
           - name: Ejemplo
             args:
