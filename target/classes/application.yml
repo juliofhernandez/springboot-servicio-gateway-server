@@ -53,3 +53,9 @@ spring:
           - AddRequestParameter=paramRequestItems,julio
           - AddRequestHeader=X-Header-Request-Items,123123
           - AddResponseHeader=X-Header-Response-Items,456456
+      - id: service-users
+        uri: lb://service-users
+        predicates:
+          - Path=/api/users/**
+        filters:
+          - StripPrefix=2
