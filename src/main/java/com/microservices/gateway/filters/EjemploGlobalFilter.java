@@ -1,4 +1,4 @@
-package com.microservices.springboot.app.gateway.filters;
+package com.microservices.gateway.filters;
 
 import java.util.Optional;
 
