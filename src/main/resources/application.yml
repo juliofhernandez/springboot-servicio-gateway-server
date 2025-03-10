@@ -81,8 +81,6 @@ spring:
             scope:
               - openid
               - profile
-              - write
-              - read
             client-name: client-app
         provider:
           spring:
